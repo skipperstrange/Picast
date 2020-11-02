@@ -1,0 +1,99 @@
+html, body{
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
+}
+
+*{
+    font-family: Arial, Helvetica, sans-serif;
+    color: #333;
+}
+
+.signInContainer{
+ background-color: #efefefef;
+ height: 100vh;
+ display: flex;
+ align-items: center;
+ justify-content: center ;
+}
+
+.column{
+    background-color: #fff;
+    min-height: 300px;
+    max-height: 100%;
+    width: 450px;
+    box-shadow: rgb(0,0,0,0.1)  0px 1px 2px;
+    padding: 20px 35px;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+.column .header{
+    padding: 20px 0px;
+}
+
+.column .header img.logo{ 
+width: 90px;
+}
+
+.info-auth, .column .header span{
+    font-size: 14px;
+}
+
+.column h3{
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 32px;
+    margin: 0px ;
+    padding-top: 16px;
+    
+}
+
+.column form{
+    display: flex;
+    flex-direction: column;
+}
+
+.column form input[type="text"],
+.column form input[type="email"],
+.column form input[type="password"]{
+    font-size: 14px;
+    margin: 12px 0px;
+    border: none;
+    border-bottom: 1px solid #dedede;
+    width:100%;
+}
+
+.column form input[type="text"].input-error,
+.column form input[type="email"].input-error,
+.column form input[type="password"].input-error{
+    border-color: #fc4c4c;
+}
+
+.column form button[type="submit"],
+.column form input[type="submit"]{
+    background-color: #4285f4;
+    color: #fff;
+    height: 36px;
+    width: 88px;
+    border: none;
+    border-radius: 3px;
+    font-weight: 500;
+    margin: 10px 0px 20px;
+    font-size: 16px;
+}
+
+div.form-input>div.error{
+    font-size: 10px;
+    color: #fc4c4c;
+}
+
+
+.info, .info-auth{
+    color: #4285f4;
+}
+
+.info-auth{
+    font-weight: 400;
+    text-decoration: none;
+}
