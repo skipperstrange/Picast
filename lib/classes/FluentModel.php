@@ -2,7 +2,7 @@
 
 class FluentModel extends FluentPDO  {
 
-    private $con;
+    protected $con;
     public $table;
     public $primaryKey;
     public $primaryKeyColumn = 'id';
@@ -22,23 +22,20 @@ class FluentModel extends FluentPDO  {
         parent::__construct($this->con); 
     }
 
-    function save($unique = false){
+    function save(){
        if(isset($this->primaryKey)){
           return  $this->update($this->table, $this->data, $this->primaryKey)->execute();
-      }elseif($unique == true){
-        
-                if($this->checkUniq()){
-                    $this->setError($this->uniqueColumn, $this->data[$this->uniqueColumn].' already exists.');
-                    return;
-                }
-             }
-                echo "hi";
-                 return  $this->insertInto($this->table, $this->data)->execute(true);
-        
+      }else{         
+            return $this->insertInto($this->table, $this->data)->execute(true);  
+        }
     }
 
     function setPrimaryKey($id){
         $this->primaryKey = $id;
+    }
+
+    function getConnection(){
+        return $this->con;
     }
     
 
@@ -60,7 +57,7 @@ class FluentModel extends FluentPDO  {
         }
     }
 
-    function setUniqueColumn($column_name = ''){
+    function setUniqueColumn(string $column_name = ''){
         $this->uniqueColumn = (isset($column_name)) ? $column_name : $this->primaryKeyColumn;
     }
 
@@ -72,23 +69,24 @@ class FluentModel extends FluentPDO  {
         $this->data[$field] = $value;
     }
 
-    function checkUniq(){
+    function checkUniq(string $column_name = ''){
+        if(isset($column_name) && trim($column_name)!= ''){ $this->setUniqueColumn($column_name);}
+
         $check = $this->from($this->table)->where($this->uniqueColumn, $this->data[$this->uniqueColumn]);
        if(count($check)> 0){
+           $this->setError($this->uniqueColumn, $this->data[$this->uniqueColumn].' already exists.');
             return true;
         }
         return false;
     }
 
+
     protected function setError($key, $msg){
-        $this->errors[$key] = $msg;
-        return;
+       $this->errors[$key] = $msg;
     }
 
     public function getErrors(){
-        if(count($this->errors) > 0){
-            return $this->errors;
-        }
+        return $this->errors;
     }
 
     function error(){

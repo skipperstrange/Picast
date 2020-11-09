@@ -42,19 +42,19 @@ function load_file(string $file, $return = false){
 
 //load a config file
 function load_config(string $file){
-    load_file(CONFIG_PATH.rtrim($file,'.php').'.php');
+    load_file(CONFIG_PATH.$file.'.php');
 }
 
 //load files from custom lib folder
 function get_custom_library(string $file){
-    load_file( CUSTOM_LIB.rtrim($file,'.php').'.php');
+    load_file( CUSTOM_LIB.$file.'.php');
 }
 
 
 //load and instatiate class from anywhere
 function load_class(string $file = null,  $instantiate=false , $class_name = ''){
     if(trim($file) !== '' ){
-        load_file(rtrim($file,'.php').'.php');
+        load_file($file.'.php');
         if($instantiate == true){
             if(trim($class_name) !== ''){
                 if(class_exists($class_name)){
@@ -72,11 +72,10 @@ function load_helper_class($file = null,  $instantiate = false, $class_name = ''
 
 //load a config file
 function load_model(string $file){
-    load_file(MODELS_PATH.rtrim($file,'.php').'.php');
+    load_file(MODELS_PATH.$file.'.php');
 }
 
 function render(string $view , $output = false){
-
     if(IS_AJAX || $output==true){
         return VIEWS_PATH.$view.'.php';
     }

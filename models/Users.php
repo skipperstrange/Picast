@@ -3,10 +3,21 @@
 
 class Users extends FluentModel {
     
-    function __construct($con = null)
+    function __construct()
     {
         $this->setUniqueColumn('username');
-        parent::__construct($con);
+        parent::__construct();
+    }
+
+    function login(){
+        
+        $query = $this->from($this->table)->select('username')->where($this->data);
+        $user = $query->fetch();
+        if(isset($user['id'])){
+            print_r($user);
+            return true;
+        }
+        return false;
     }
     
 }

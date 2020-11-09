@@ -1,10 +1,7 @@
 <?php 
-
-
 $form  = load_helper_class('formr/class.formr', true, 'Formr');
-
-
 $form->required = '*';
+
 if($form->submit()){
    
     $form->post('email','Email','valid_email');
@@ -34,15 +31,18 @@ if($form->submit()){
         $user['password'] = hash_password($form->post('password'));
         $user['username'] = sanitizeFormString($form->post('username'));
         $UserModel->initData($user); 
-        $UserModel->save(true);
-        if($UserModel->error()){
-           print_r($UserModel->getErrors()); 
-           //username exists
+
+        if($UserModel->checkUniq()){
+            
+        }elseif($UserModel->checkUniq('email')){
+              
+        }else{
+            if($user = $UserModel->save()){
+                redirect_to('login');
+            }
         }
-        else{
-            redirect_to('login');
-        }
-        
+        print_r($UserModel->getErrors());
+  
         
     }
 }

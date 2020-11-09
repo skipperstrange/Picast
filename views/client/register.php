@@ -14,7 +14,7 @@
          if(check_key_exists(@$form->errors['firstName'])){
           ?>
            <div class="error">
-             <?= @$form->errors['confirmEmail']?>
+             <?= @$form->errors['firstName']?>
            </div>
           <?php
         } 
