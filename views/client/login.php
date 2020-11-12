@@ -7,14 +7,20 @@
               <span>to continue to <?= ucfirst(APP) ?></span>
             </div>
           <form action="<?= _link('login') ?>"" method="post">
+          <div class="error">
+            <?php 
+                
+                echo @$errors['login_failed'];
+            ?>
+          </div>
           <div class="form-input">
          <?php 
-         echo $form->input_email("email", '', '', 'email', 'placeholder="Email" class="'.@$errors['email']['class'].'"'); // name, label, value, id, 
+         echo $form->input_text("username", '', '', 'username', 'placeholder="Username" class="'.@$errors['username']['class'].'"'); // name, label, value, id, 
          
-         if(check_key_exists(@$form->errors['email'])){
+         if(check_key_exists(@$form->errors['username'])){
           ?>
            <div class="error">
-             <?= @$form->errors['email']?>
+             <?= @$form->errors['username']?>
            </div>
           <?php
         } 

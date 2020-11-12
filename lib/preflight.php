@@ -11,7 +11,7 @@ if( $__mode == 'development'){
 }
 
 //database initializer. sets up db connection. and options
-$__db_creds = get_config('db');
+$__db_creds = get_config('database');
 if($__db_creds['db_auto']){
     try{
         $__db = new PDO("mysql:host=$__db_creds[host];dbname=$__db_creds[database]", 
@@ -81,4 +81,35 @@ if($__autoload['enable']){
             }
         }
     }
+
+    // setup default session class
+    if(class_exists('Sessions')){
+        $__sessions = new Sessions;
+        set_config('sessions', $__sessions); 
+    }
+
+
+    //Setup controller guards
+    $__gaurds = get_config('guards');
+    $act = $_GET[CONTOLLER];
+    foreach($__gaurds['auth_required'] as $auth_guarded => $redirect){
+        if($__sessions->isAuthenticated() !== true){
+            if($act == $auth_guarded){
+                redirect_to($redirect);
+            }
+        }
+    }
+
+    foreach($__gaurds['auth_not_required'] as $auth_guarded => $redirect){
+        if($__sessions->isAuthenticated() === true){
+            if($act == $auth_guarded){
+                redirect_to($redirect);
+            }
+        }
+    }
+
+
+
+
+
 

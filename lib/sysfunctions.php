@@ -7,7 +7,7 @@ include_once 'constants.php';
 //get a cofiguration value
 function get_config(string $key){
     global $config;
-    return $config[$key];
+    return @$config[$key];
 }
 
 //get a cofiguration value
@@ -73,6 +73,13 @@ function load_helper_class($file = null,  $instantiate = false, $class_name = ''
 //load a config file
 function load_model(string $file){
     load_file(MODELS_PATH.$file.'.php');
+}
+
+function auto_load_model(string $file){
+    load_file(MODELS_PATH.$file.'.php');
+    if(class_exists($file)){
+        return $file = new $file;
+    }
 }
 
 function render(string $view , $output = false){

@@ -11,7 +11,7 @@ return $config =[
      * Database settings. N.B. Only PDO settings
      */
     //mysql config params
-    'db' => [
+    'database' => [
         'host'=> 'localhost',
         'port' => '', // leave blank for default :3306
         'username' => 'root',
@@ -32,7 +32,8 @@ return $config =[
         'enable' => true,
         'classes' => [
            'Inflect',
-           //'fluentpdo/FluentPDO/FluentPDO', //fluentpdo
+           //'fluentpdo/FluentPDO/FluentPDO', //fluentpdo,
+           'core/Session',
            
         ],
         'libs' => [
@@ -46,16 +47,35 @@ return $config =[
         'auto_parent' => true, // automatic load of parent
         'classes' => [
            [
-            'FluentModel' => 'fluentpdo/FluentPDO/FluentPDO'  //fluentpdo child
+            'core/FluentModel' => 'fluentpdo/FluentPDO/FluentPDO' , //fluentpdo child
+            'Model' => 'core/FluentModel' , //fluentpdo child
             ], 
         ]
         
     ],
 
 
-        'encryption'=>[
-            'enable' => false, //sets crypt function to be used in encrypt function
-            'salt' => ""
-        ]
+    'encryption'=>[
+        'enable' => false, //sets crypt function to be used in encrypt function
+        'salt' => ""
+    ],
+
+    'guards' => [
+        //should have a redirect page to go to :string
+        //pages that require authentication. 
+        'auth_required' => [
+            // array('page', 'redirect')
+            'index'=>'login',
+            'logout'=>'login'
+        ],
+
+        //should have a redirect page to go to :string
+        //pages that require no authentication. 
+        'auth_not_required' =>[
+                // array('page', 'redirect')
+            'register'=>'index',
+            'login'=>'index',
+            ] 
+    ]
 
 ];

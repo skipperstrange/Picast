@@ -83,9 +83,14 @@ width: 90px;
     font-size: 16px;
 }
 
-div.form-input>div.error{
+div.form-input>div.error, .error{
     font-size: 10px;
     color: #fc4c4c;
+    font-weight: bold;;
+}
+
+.error {
+    font-weight: 13px;
 }
 
 
