@@ -34,6 +34,7 @@ return $config =[
            'Inflect',
            //'fluentpdo/FluentPDO/FluentPDO', //fluentpdo,
            'core/Session',
+           'core/Msg'
            
         ],
         'libs' => [

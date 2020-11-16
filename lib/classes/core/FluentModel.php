@@ -82,6 +82,14 @@ class FluentModel extends FluentPDO  {
         return $this->data;
     }
 
+    function setOrderBy($orderBy){
+        $this->orderBy = " $orderBy ";
+    }
+
+    function setLimit($limit){
+        $this->limit = $limit;
+    }
+
     function setData($data){
         if(is_array($data)){
             foreach($data as $field => $value)

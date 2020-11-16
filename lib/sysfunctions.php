@@ -93,7 +93,7 @@ function render(string $view_file , $data = []){
     if(IS_AJAX){
         return $view_file.'.php';
     }
-    include_once $view_file.'.php';
+    include $view_file.'.php';
 }
 
 //loads view file from client folder

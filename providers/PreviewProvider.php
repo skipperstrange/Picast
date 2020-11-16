@@ -16,8 +16,11 @@ class PreviewProvider {
     }
 
 
-    function getRandomEntity(){
-        return $this->EntityModel->getRandomEntity();
+    function getEntity($id = null){
+        if($id){
+            $this->EntityModel->setPrimaryKey($id);
+        }
+        return $this->EntityModel->getEntity();
     }
 
     function getCategory($id = null){
@@ -30,10 +33,20 @@ class PreviewProvider {
 
     function getCategoryEntities($id = null){
 
-        $CategoryEntities = $this->getCategory($id);
-        foreach($CategoryEntities as $Entities => $val){
-           $CategoryEntities[$Entities]['entities'] = $this->EntityModel->getEntitiesByCategory($CategoryEntities[$Entities]['id']);
+
+        $this->EntityModel->setLimit(21);
+        $this->EntityModel->setOrderBy("RAND()");
+        $Categories = $this->getCategory($id);
+        $CategoryEntities = [];
+        foreach($Categories as $Category => $val){
+            $entities = $this->EntityModel->getEntitiesByCategory($Categories[$Category]['id']);
+            if(count($entities) > 0){
+                $Categories[$Category]['entities'] = $entities;
+                $CategoryEntities[] = $Categories[$Category];
+            }
+
         }
+        
         return $CategoryEntities;
     }
 

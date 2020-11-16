@@ -4,10 +4,10 @@ load_provider('PreviewProvider');
 $PreviewProvider = new PreviewProvider;
 
 
-$data['leadVideo'] = $PreviewProvider->getRandomEntity();
+$data['leadVideo'] = $PreviewProvider->getEntity();
 
 $cat['cateqoriesEntities'] = $PreviewProvider->getCategoryEntities();
 
-render_client('video_preview', $data);
+render_client('video-preview', $data);
 
-render_client('cat_entities', $cat);
+render_client('cat-entities', $cat);

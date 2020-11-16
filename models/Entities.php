@@ -15,13 +15,21 @@ class Entities extends  Model {
        return $results = $this->quickSelect();
     }
 
-    function getRandomEntity(){
+    function getEntity(){
         $this->limit = 1;
         $this->orderBy = "RAND()";
-        return $results = $this->quickSelect()->fetch();
+        $results = $this->quickSelect();
+        if(isset($this->primaryKey)){
+            $results->where($this->primaryKeyColumn, $this->primaryKey);
+        }
+        return $results->fetch();
     }
 
     function getEntitiesByCategory($categoryId){
-        return  $this->from($this->table)->select($this->getDataColumns())->where('categoryId', $categoryId)->fetchAll();
+
+        return  $this->from($this->table)->
+        select($this->getDataColumns())->
+        limit($this->limit)->
+        where('categoryId', $categoryId)->orderBy($this->orderBy)->fetchAll();
     }
 }
