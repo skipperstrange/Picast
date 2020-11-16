@@ -1,5 +1,5 @@
 <?php 
-$form  = load_helper_class('formr/class.formr', true, 'Formr');
+$form  = load_helper('formr/class.formr', true, 'Formr');
 $form->required = '*';
 
 if($form->submit()){
@@ -20,15 +20,13 @@ if($form->submit()){
         $UserModel = new Users($__db);
         $user['username'] = $form->post('username');
         $user['password'] = hash_password($form->post('password'));
-        $UserModel->initData($user); 
-        $UserModel->login();
+        $UserModel->setData($user); 
+
         if($UserModel->login()){
-                redirect_to('index');
+                redirect_to();
         }
         $errors = $UserModel->getErrors();
     }
 }
 
 
-
-?>

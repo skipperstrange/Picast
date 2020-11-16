@@ -52,6 +52,9 @@ define('CUSTOM_LIB', LIB_PATH.'custom'.DS);
 define('MODEL', 'models');
 define('MODELS_PATH', MODEL.DS);
 
+define('PROVIDERS_PATH', 'providers'.DS);
+define('HELPERS_PATH', 'helpers'.DS);
+
 //views
 define('VIEW', 'views');
 define('VIEWS_PATH', VIEW.DS);

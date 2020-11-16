@@ -33,7 +33,9 @@ class SelectQuery extends CommonQuery implements Countable
      */
     function __construct(FluentPDO $fpdo, $from) {
         $clauses = array(
-            'SELECT'   => ', ',
+        //    'SELECT'   => ', ',
+        //Changed by skipperstrange for project
+            'SELECT'   => ' ',
             'FROM'     => null,
             'JOIN'     => array($this, 'getClauseJoin'),
             'WHERE'    => ' AND ',
@@ -52,7 +54,9 @@ class SelectQuery extends CommonQuery implements Countable
         $this->fromAlias = end($fromParts);
 
         $this->statements['FROM']     = $from;
-        $this->statements['SELECT'][] = $this->fromAlias . '.*';
+        //$this->statements['SELECT'][] = $this->fromAlias . '.*';
+        //Changed by skipperstrange for project
+        $this->statements['SELECT'][] = '';
         $this->joins[]                = $this->fromAlias;
 
         if(isset($fpdo->convertTypes) && $fpdo->convertTypes){

@@ -3,7 +3,7 @@
 
 return $config =[
     'mode' => 'development', //development and production
-    'default_controller' => 'login',
+    'default_controller' => 'index',
     'page_title' => '',
 
 
@@ -52,6 +52,11 @@ return $config =[
             ], 
         ]
         
+    ],
+
+    //Classes and files for helper functionality.
+    'providers'=>[
+            'PreveiwProvider'
     ],
 
 

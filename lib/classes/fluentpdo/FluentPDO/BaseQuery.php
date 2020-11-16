@@ -278,7 +278,6 @@ abstract class BaseQuery implements IteratorAggregate
                 }
             }
         }
-
         return trim($query);
     }
 

@@ -88,10 +88,10 @@ if($__autoload['enable']){
         set_config('sessions', $__sessions); 
     }
 
-
+    
     //Setup controller guards
     $__gaurds = get_config('guards');
-    $act = $_GET[CONTOLLER];
+    $act = @$_GET[CONTOLLER];
     foreach($__gaurds['auth_required'] as $auth_guarded => $redirect){
         if($__sessions->isAuthenticated() !== true){
             if($act == $auth_guarded){

@@ -2,8 +2,35 @@
 
 function redirect_to($action=null)
 {
-   header('location:' .'?action='.$action );
+    $action = _link($action);
+   header('location:'.$action );
   exit;
+}
+
+
+function anchor_link($text='',$action=null, $attributes=[])
+{
+    //$arr = array_walk($attributes, 'set_attributes', $attributes);
+    $attr = "";
+    if(!empty($attributes)){
+        foreach($attributes as $proberty => $value){
+            $attr .= " $proberty=\"$value\"";
+        }
+    }
+
+    $link = _link($action);
+    
+   return "<a href=\"$link\" $attr>$text</a>";
+}
+
+function set_attributes($attributes=[]){
+    $attr = "";
+    if(!empty($attributes)){
+        foreach($attributes as $proberty => $value){
+            $attr .= " $proberty=\"$value\"";
+        }
+    }
+    return $attr;
 }
 
  /**
@@ -13,8 +40,14 @@ function redirect_to($action=null)
  * @return bool true or false
  */
 function _link($action = ""){
-    $url = "?action=$action";
-    if(trim($action) == '') : $url ='#'; endif;
+    
+    if(trim($action) == '') : 
+        $url ='?';
+    elseif(trim($action)== '#'):
+        $url ='#';
+    else:
+        $url = "?action=$action";
+    endif;
     return $url;
 }
  //checks if post or get value is not null

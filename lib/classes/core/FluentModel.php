@@ -3,12 +3,15 @@
 class FluentModel extends FluentPDO  {
 
     protected $con;
-    public $table;
-    public $primaryKey;
-    public $primaryKeyColumn = 'id';
-    protected $data;
-    public $uniqueColumn;
-    protected $errors = [];
+    protected $table;
+    protected $primaryKey;
+    protected $primaryKeyColumn = 'id';
+    public $data;
+    protected $contitions = []; // [orderBy=>'', 'limit'=>'', 'random'=>'()']
+    protected $limit;
+    protected $orderBy = "id desc";
+    protected $uniqueColumn;
+    public $errors = [];
     public $error = false;
 
     function __construct( $con = null)
@@ -20,6 +23,30 @@ class FluentModel extends FluentPDO  {
             $this->con = get_config(('db'));
         endif;
         parent::__construct($this->con); 
+    }
+
+
+    public function getDataColumns(){
+        $columns = array_keys($this->data);
+        foreach($columns as $column){
+            $column .= "`$this->table`.`$column`";
+        }
+        return implode(',', $columns);
+    }
+
+    public function quickSelect(){
+       
+        $query = $this->from($this->table)->select($this->getDataColumns());
+        if(isset($this->primaryKey)){
+            $query->where($this->primaryKeyColumn, $this->primaryKey)->fetch();
+        }else{
+            $query->orderBy($this->orderBy);
+            if(isset($this->limit) && is_int($this->limit)){
+                $query->limit($this->limit);
+            }
+            $query->fetchAll();
+        }
+        return $query;
     }
 
     function save(){
@@ -47,16 +74,6 @@ class FluentModel extends FluentPDO  {
         $this->table = $table;
     }
 
-    function initData($data){
-        if(is_array($data)){
-            foreach($data as $field => $value)
-                $this->setData($field, $value);
-        }
-        else{
-           $this->data = $data; 
-        }
-    }
-
     function setUniqueColumn(string $column_name = ''){
         $this->uniqueColumn = (isset($column_name)) ? $column_name : $this->primaryKeyColumn;
     }
@@ -65,7 +82,17 @@ class FluentModel extends FluentPDO  {
         return $this->data;
     }
 
-    function setData($field, $value){
+    function setData($data){
+        if(is_array($data)){
+            foreach($data as $field => $value)
+                $this->initData($field, $value);
+        }
+        else{
+           $this->data = $data; 
+        }
+    }
+
+    function initData($field, $value){
         $this->data[$field] = $value;
     }
 

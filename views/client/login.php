@@ -44,7 +44,5 @@
          echo $form->input_submit("login", '', 'Login', 'login'); // name, label, value, id, 
           ?>
           </form>
-
-          <a href="<?= _link('register')?>" class="info info-auth">Need an account? Sign up here</a>
-      </div>
+         <?= anchor_link('Need an account? Sign up here', 'register', ['class'=>'info info-auth']) ?>
   </div>

@@ -7,20 +7,21 @@ include_once CONFIG_PATH.'config.php';
 include_once LIB_PATH.'sysfunctions.php';
 include_once LIB_PATH.'functions.php';
 include_once LIB_PATH.'preflight.php';
-require_once 'vendor/autoload.php';
+//require_once 'vendor/autoload.php';
 
 
 $data = [];
 
 $action = empty($_GET[CONTOLLER])? get_config('default_controller'): $_GET[CONTOLLER];
+$controller = $action.'.php';
 
-$controlFile = $action.'.php';
+$data['action'] = $action;
+$data['controller']  = $action.'.php';
+
 
 
 set_page_title();
-
-
-@include_once CONTOLLER_PATH.$controlFile ;
+@include_once CONTOLLER_PATH.$controller ;
 
 //render_client_layout('', $data);
 include_once VIEWS_PATH.'_layout.php';

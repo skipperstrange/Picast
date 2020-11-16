@@ -10,9 +10,8 @@ class Users extends Model {
     }
 
     function login(){
-        $query = $this->from($this->table)->select('username')->where($this->data);
+        $query = $this->from($this->table)->select('username, id')->where($this->data);
         $user = $query->fetch();
-       
         if(isset($user['id'])){
             $this->session->set('userid',$user['id']);
             $this->session->set('username',$user['username']);

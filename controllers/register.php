@@ -1,5 +1,5 @@
 <?php 
-$form  = load_helper_class('formr/class.formr', true, 'Formr');
+$form  = load_helper('formr/class.formr', true, 'Formr');
 $form->required = '*';
 
 if($form->submit()){
@@ -30,7 +30,7 @@ if($form->submit()){
         $user['email'] = sanitizeFormString(strtolower($form->post('email')));
         $user['password'] = hash_password($form->post('password'));
         $user['username'] = sanitizeFormString($form->post('username'));
-        $UserModel->initData($user); 
+        $UserModel->setData($user); 
 
         if($UserModel->checkUniq()){
             

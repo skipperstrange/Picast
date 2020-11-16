@@ -113,7 +113,6 @@
          echo $form->input_submit("signUp", '', 'Sign Up', 'signUp'); // name, label, value, id, 
           ?>
           </form>
-
-          <a href="<?= _link('login') ?>" class="info info-auth">Already have an account? Sign in</a>
+          <?= anchor_link('Already have an account? Sign in', 'login', ['class'=>'info info-auth']) ?>
       </div>
   </div>

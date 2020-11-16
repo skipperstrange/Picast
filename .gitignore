@@ -1,0 +1,4 @@
+./entities/previews/*
+./entities/thumbnails/*
+./entities/videos/*
+./vendor/

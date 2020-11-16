@@ -10,7 +10,7 @@ function get_config(string $key){
     return @$config[$key];
 }
 
-//get a cofiguration value
+//get a cofiguration value from custom config file
 function getr_config(string $config_file, string $key){
     load_config($config_file);
     return get_config($key);
@@ -46,7 +46,7 @@ function load_config(string $file){
 }
 
 //load files from custom lib folder
-function get_custom_library(string $file){
+function load_custom_library(string $file){
     load_file( CUSTOM_LIB.$file.'.php');
 }
 
@@ -61,12 +61,13 @@ function load_class(string $file = null,  $instantiate=false , $class_name = '')
                     return new $class_name();
                 }
             }
+        return $file = new $file();
         }
     }
 }
 
-function load_helper_class($file = null,  $instantiate = false, $class_name = ''){
-    return load_class(CLASS_PATH.$file,$instantiate, $class_name);
+function load_helper($file = null,  $instantiate = false, $class_name = ''){
+    return load_class(HELPERS_PATH.$file,$instantiate, $class_name);
 }
 
 
@@ -82,28 +83,34 @@ function auto_load_model(string $file){
     }
 }
 
-function render(string $view , $output = false){
-    if(IS_AJAX || $output==true){
-        return VIEWS_PATH.$view.'.php';
+//load a config file
+function load_provider(string $file){
+    load_file(PROVIDERS_PATH.$file.'.php');
+}
+
+function render(string $view_file , $data = []){
+    extract($data);
+    if(IS_AJAX){
+        return $view_file.'.php';
     }
-    include_once VIEWS_PATH.$view.'.php';
+    include_once $view_file.'.php';
 }
 
 //loads view file from client folder
-function render_client(string $view , $output = false){
-    return render(CLIENT_VIEWS_PATH.$view);
+function render_client(string $view_file, $data = []){
+    return render(CLIENT_VIEWS_PATH.$view_file, $data);
 }
 
 //loads view file from admin
-function render_admin(string $view , $output = false){
-    return render(ADMIN_VIEWS_PATH.$view);
+function render_admin(string $view_file, $data = []){
+    return render(ADMIN_VIEWS_PATH.$view_file, $data);
 }
 
 
 //loads default client template 
-function render_client_layout($layout = '_layout'){
+function render_client_layout($layout = '_layout', $data){
     if(trim($layout) == ''){$layout = '_layout';}
-    render(VIEWS_PATH.$layout);
+    render(VIEWS_PATH.$layout, $data);
 }
 
 
@@ -164,4 +171,5 @@ function json_response($message = null, $code = 200, $headers = [''])
         'message' => $message
         ));
 }
+
 
