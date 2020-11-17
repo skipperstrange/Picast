@@ -1,10 +1,13 @@
 <?php
+$PreviewProvider = auto_load_provider('PreviewProvider');
+$SeasonProvider = auto_load_provider('SeasonProvider');
 
-load_provider('PreviewProvider');
-$PreviewProvider = new PreviewProvider;
-
-if(!check_post_get('g', 'id')){
-   return;
-
-$data['leadVideo'] = $PreviewProvider->getEntity();
-render_client('video-preview', $data);
+if(check_post_get('g', 'id')){
+     $id = post_get('g', 'id');
+    $data['leadVideo'] = $PreviewProvider->getEntity($id);
+    $data['seasons'] = $SeasonProvider->getVideosSeasonByEntity($id);
+    $data ['thumbnail']=$data['leadVideo']['thumbnail'] ;
+    $data['entityId']=$data['leadVideo']['id'];
+    $data['suggested'] = $PreviewProvider->getCategoryEntities($data['leadVideo']);
+    
+}

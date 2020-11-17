@@ -88,6 +88,13 @@ function load_provider(string $file){
     load_file(PROVIDERS_PATH.$file.'.php');
 }
 
+function auto_load_provider(string $file){
+    load_file(PROVIDERS_PATH.$file.'.php');
+    if(class_exists($file)){
+        return $file = new $file;
+    }
+}
+
 function render(string $view_file , $data = []){
     extract($data);
     if(IS_AJAX){

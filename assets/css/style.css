@@ -127,11 +127,13 @@ div.form-input>div.error, .error{
 
 .preview-video, .preview-img{
     width: 100%;
+    object-fit:cover
 }
 
 .preview-container{
     position: relative;
     display: flex;
+    max-height: 400px;
 }
 
 .preview-container.small{
@@ -161,7 +163,7 @@ div.form-input>div.error, .error{
     object-fit:cover;
 }
 
-.preview-container.small img:hover{
+.preview-container.small img:hover, .episode-container img:hover{
    transform: scale(1.08);
 }
 .preview-overlay  .main-details h3 {
@@ -172,7 +174,7 @@ div.form-input>div.error, .error{
 
 .preview-overlay .main-details{
     position: relative;
-    top: 35%;
+    top: 2em;
     margin-left: 50px;
     display: flex;
     flex-direction: column;
@@ -212,7 +214,7 @@ button i {
     padding:10px 0;
 }
 
-.entities{
+.entities, .videos{
     overflow-x:auto;
     overflow-y:hidden;
     white-space: nowrap;
@@ -221,8 +223,51 @@ button i {
 .error-banner{
     color: #fff;
     position: absolute;
-    top: 25%;
+    top: 30%;
     width: 100%;
     text-align: center;
     font-size: 20px;
+}
+
+.season{
+    display:flex;
+    flex-direction:column;
+    padding:10px;
+}
+
+.season h3{
+    color:#fff;
+    font-size:22px;
+}
+
+.episode-container{
+    display:inline-flex;
+    justify-content:center;
+    margin:0 2px;
+    width:230px;
+    margin-bottom:45px;
+}
+
+.episode-container.content{
+    display:flex;
+    flex-direction:column;
+    height:129px;
+}
+
+.episode-container img{
+    width: 100%;
+    object-fit:cover;
+}
+
+.episode-container .video-info h4,
+.episode-container .video-info span{
+    color:#fff;
+    white-space:normal;
+    margin-top:10px
+}
+
+.episode-container .video-info{
+    max-height: 200px;
+    overflow-y: auto;
+    font-size: 12px;
 }

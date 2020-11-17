@@ -83,6 +83,19 @@ function _link($action = ""){
     return false;
 }
 
+function post_get($post_or_get, $key = null, $value = null){
+    if(trim($post_or_get) == 'get' || trim($post_or_get) == 'g'){
+        if(trim($post_or_get) == 'get' || trim($post_or_get) == 'g'){
+            return trim($_GET[$key]);
+        }
+    }
+    if(check_post_get($post_or_get) == 'post' || trim($post_or_get) == 'p'){
+        if(trim($post_or_get) == 'post' || trim($post_or_get) == 'p'){
+            return trim($_POST[$key]);
+        }
+    }
+}
+
 
 
 //Formatting date and time

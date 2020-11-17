@@ -2,8 +2,8 @@
 
 class PreviewProvider {
 
-    public $EntityModel;
-    public $CategoryModel;
+    private $EntityModel;
+    private $CategoryModel;
 
     function __construct()
     {
@@ -32,8 +32,6 @@ class PreviewProvider {
 
 
     function getCategoryEntities($id = null){
-
-
         $this->EntityModel->setLimit(21);
         $this->EntityModel->setOrderBy("RAND()");
         $Categories = $this->getCategory($id);

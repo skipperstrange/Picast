@@ -8,7 +8,7 @@ class FluentModel extends FluentPDO  {
     protected $primaryKeyColumn = 'id';
     public $data;
     protected $contitions = []; // [orderBy=>'', 'limit'=>'', 'random'=>'()']
-    protected $limit;
+    protected $limit = null;
     protected $orderBy = "id desc";
     protected $uniqueColumn;
     public $errors = [];
@@ -72,6 +72,10 @@ class FluentModel extends FluentPDO  {
 
     function  setTable (?string $table = '') {
         $this->table = $table;
+    }
+
+    function getTable(){
+        return  $this->table;
     }
 
     function setUniqueColumn(string $column_name = ''){

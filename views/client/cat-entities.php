@@ -1,4 +1,4 @@
-<div class="category-previews">>
+<div class="category-previews">
 <?php
 foreach($cateqoriesEntities as $Category){
 ?>
@@ -17,5 +17,3 @@ foreach($cateqoriesEntities as $Category){
 }
 ?>
 </div>
-   
-

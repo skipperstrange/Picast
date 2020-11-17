@@ -8,7 +8,6 @@ class Entities extends  Model {
     function __construct()
     {
         parent::__construct();
-        
     }
 
     function getEnities(){
@@ -26,10 +25,10 @@ class Entities extends  Model {
     }
 
     function getEntitiesByCategory($categoryId){
-
         return  $this->from($this->table)->
         select($this->getDataColumns())->
         limit($this->limit)->
-        where('categoryId', $categoryId)->orderBy($this->orderBy)->fetchAll();
+        where('categoryId', $categoryId)->
+        orderBy($this->orderBy)->fetchAll();
     }
 }
