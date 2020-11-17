@@ -98,14 +98,24 @@ function auto_load_provider(string $file){
 function render(string $view_file , $data = []){
     extract($data);
     if(IS_AJAX){
-        return $view_file.'.php';
+        return @$view_file.'.php';
     }
-    include $view_file.'.php';
+    @include $view_file.'.php';
 }
 
 //loads view file from client folder
 function render_client(string $view_file, $data = []){
-    return render(CLIENT_VIEWS_PATH.$view_file, $data);
+
+    if($view_file !== ''){
+        if(file_exists(CLIENT_VIEWS_PATH.$view_file.'.php')){
+        render(CLIENT_VIEWS_PATH.$view_file, $data);
+        }else{
+            render(VIEWS_PATH.'_404', $data);
+        }
+    }else{
+        render('', $data);
+    }
+    
 }
 
 //loads view file from admin

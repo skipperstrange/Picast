@@ -6,4 +6,4 @@ $PreviewProvider = new PreviewProvider;
 
 $data['leadVideo'] = $PreviewProvider->getEntity();
 
-$cat['cateqoriesEntities'] = $PreviewProvider->getCategoryEntities();
+$data['cat']['cateqoriesEntities'] = $PreviewProvider->getCategoryEntities();

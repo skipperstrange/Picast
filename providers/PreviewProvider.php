@@ -32,7 +32,7 @@ class PreviewProvider {
 
 
     function getCategoryEntities($id = null){
-        $this->EntityModel->setLimit(21);
+        $this->EntityModel->setLimit(35);
         $this->EntityModel->setOrderBy("RAND()");
         $Categories = $this->getCategory($id);
         $CategoryEntities = [];

@@ -1,6 +1,9 @@
+<?php
+if(check_key_exists($leadVideo, 'id')){
+?>
 <div class="preview-container">
     <img src="<?= $leadVideo['thumbnail'] ?>" alt="" class="preview-img" hidden>
-    <video class="preview-video" autoplay muted onended="previewEnded()">
+    <video class="preview-video" autoplay muted onended="previewMediaToggle()">
         <source src="<?= $leadVideo['preview'] ?>" type="video/mp4">
     </video>
 
@@ -15,3 +18,10 @@
         </div>
     </div>
 </div>
+<?php
+}else{
+?>
+
+<?
+}
+?>

@@ -29,6 +29,12 @@ class Videos extends  Model {
         $query->orderBy($this->orderBy);
 
         return $query->fetchAll();
+    }
 
+    function incrementVideoWatchCount(){
+        if(isset($this->primaryKey)){
+            $this->update($this->table, ['views'=>'views+1'], $this->primaryKey)->execut();
+        }
+        
     }
 }

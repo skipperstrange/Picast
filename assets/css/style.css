@@ -232,12 +232,26 @@ button i {
 .season{
     display:flex;
     flex-direction:column;
-    padding:10px;
+    padding:0 15px
 }
 
-.season h3{
+.season h3, .row-title{
     color:#fff;
     font-size:22px;
+}
+
+.season .category-previews{
+    padding: 0px;
+}
+
+
+.season .entities{
+    white-space: normal;
+    padding: 5px 0px;
+}
+
+.season .preview-container{
+    padding: 10px 0px;
 }
 
 .episode-container{
@@ -252,6 +266,11 @@ button i {
     display:flex;
     flex-direction:column;
     height:129px;
+}
+
+.episode-container.content.img-container{
+   padding:0;
+   margin:0;
 }
 
 .episode-container img{

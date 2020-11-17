@@ -3,11 +3,7 @@
 <div class="main">
 <?php 
 include_once CONTOLLER_PATH.$controller ;
-if(file_exists(CLIENT_VIEWS_PATH.$action.'.php')){
-    include_once CLIENT_VIEWS_PATH. $action.'.php';
-}else{
-    include_once VIEWS_PATH.'_404.php';
-}
+    render_client($action, $data);
 ?>
 </div>
 </body>

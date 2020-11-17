@@ -2,7 +2,7 @@
     <?php 
     foreach($seasons as $season => $episodes){
         ?>
-    <h3>Season <?=$season?></h3>
+    <h3 class="row-title">Season <?=$season?></h3>
     <div class="videos">
         <?php
             foreach($episodes as $episode){

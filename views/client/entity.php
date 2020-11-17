@@ -6,5 +6,10 @@ render_client('video-preview', $data);
 render_client('seasons-preview', $data);
 }
 ?>
-<h3>Suggested</h3>
+<div class="season">
+<?
+$data['suggested']['cateqoriesEntities'][0]['name']  = 'Suggested';
+render_client('cat-entities',$data['suggested']);
+?>
+</div>
 
